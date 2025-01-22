@@ -27,8 +27,7 @@ const Add = () => {
     }
 
     try {
-      // Update the API URL to your deployed backend URL
-      await axios.post("https://task-nine-blue.vercel.app/tasks", task); // Backend URL
+      await axios.post("http://localhost:8800/tasks", task); // Send task with status
       navigate('/'); // Navigate to the main page after adding task
     } catch (err) {
       console.log(err);
