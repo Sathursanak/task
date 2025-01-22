@@ -18,7 +18,7 @@ const Update = () => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/tasks/${taskId}`);
+        const res = await axios.get(`https://task-nine-blue.vercel.app/tasks/${taskId}`); // Updated URL
         setTask(res.data); // Set the task data to state
       } catch (err) {
         console.log(err); // Log error if fetch fails
@@ -36,7 +36,7 @@ const Update = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8800/tasks/${taskId}`, task); 
+      await axios.put(`https://task-nine-blue.vercel.app/tasks/${taskId}`, task); // Updated URL
       navigate('/'); // Redirect to home page after updating
     } catch (err) {
       console.log(err); // Log error if update fails
