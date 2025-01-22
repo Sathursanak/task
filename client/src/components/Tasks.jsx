@@ -3,16 +3,18 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
 
-
 const Tasks = () => {
   // to hold tasks data
   const [tasks, setTasks] = useState([]);
+
+  // Define the base URL for your backend (update with the correct URL)
+  const baseURL = "https://task-nine-blue.vercel.app"; // your backend URL
 
   // Fetch all tasks from the backend
   useEffect(() => {
     const fetchAllTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/tasks");
+        const res = await axios.get(`${baseURL}/tasks`);
         setTasks(res.data); // Set fetched tasks to state
       } catch (err) {
         console.log(err);
@@ -24,7 +26,7 @@ const Tasks = () => {
   // to handle task deleting
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/tasks/${id}`);
+      await axios.delete(`${baseURL}/tasks/${id}`);
       // Remove the deleted task from local state instead of reloading the page
       setTasks(tasks.filter((task) => task.id !== id));
     } catch (err) {
@@ -37,7 +39,7 @@ const Tasks = () => {
     const newStatus = currentStatus === "Completed" ? "Pending" : "Completed"; // Toggle status
 
     try {
-      await axios.put(`http://localhost:8800/tasks/status/${taskId}`, {
+      await axios.put(`${baseURL}/tasks/status/${taskId}`, {
         status: newStatus, // Send updated status to backend
       });
 
