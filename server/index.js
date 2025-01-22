@@ -12,9 +12,7 @@ const connection = mysql.createConnection({
 });
 
 app.use(express.json());
-app.use(cors({
-  origin: "https://task-frontent.vercel.app", 
-}));
+app.use(cors());
 
 app.get('/', (req, res) =>{
   res.json("success")
@@ -71,7 +69,7 @@ app.put("/tasks/:id", (req, res) => {
   });
 });
 
-  // Update task status by IDF
+  // Update task status by ID
 app.put("/tasks/status/:id", (req, res) => {
   const taskId = req.params.id;
   const newStatus = req.body.status; // The new status (e.g., "Completed" or "Pending")
