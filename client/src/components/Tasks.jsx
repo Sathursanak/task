@@ -9,6 +9,7 @@ const Tasks = () => {
   // to hold tasks data
   const [tasks, setTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [showPending, setShowPending] = useState(false);
 
   // Fetch all tasks from the backend
   useEffect(() => {
@@ -55,8 +56,11 @@ const Tasks = () => {
   };
 
   const filteredTasks = tasks.filter((task) =>
-    task.title.toLowerCase().includes(searchQuery.toLowerCase())
+    task.title.toLowerCase().includes(searchQuery.toLowerCase()) // search for tasks
   );
+
+  const pendingTasks = filteredTasks.filter((task) => 
+    task.status === "Pending"); // Filter pending tasks
 
   return (
     <div className="p-6 bg-gray-200 min-h-screen rounded-lg ">
@@ -66,8 +70,24 @@ const Tasks = () => {
       <h1 className="text-teal-500 text-3xl font-bold my-6 text-center">Task-Manager</h1>
        {/* Search Bar Component */}
        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <div className="space-y-6">
-      {filteredTasks.map((task) => (
+       
+       {/* Toggle Pending Tasks Button */}
+
+
+<div className="flex justify-between items-center gap-4">
+  <span>Total Tasks: {tasks.length}</span>
+  <span>Pending Tasks: {pendingTasks.length}</span>
+</div>
+
+<button
+  onClick={() => setShowPending(!showPending)}
+  className="bg-teal-500 text-white py-2 px-4 rounded-md hover:bg-teal-700 mb-4"
+>
+  {showPending ? "Show All Tasks" : "Show Pending Tasks"}
+</button>
+
+<div className="space-y-6">
+        {(showPending ? pendingTasks : filteredTasks).map((task) => (
           <div
             className="bg-white p-4 rounded-lg border-2 border-teal-500"
             key={task.id}
