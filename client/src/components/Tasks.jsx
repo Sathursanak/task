@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
+import SearchBar from "./SearchBar";
 
 
 const Tasks = () => {
   // to hold tasks data
   const [tasks, setTasks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
 
   // Fetch all tasks from the backend
   useEffect(() => {
@@ -52,14 +54,20 @@ const Tasks = () => {
     }
   };
 
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="p-6 bg-gray-200 min-h-screen rounded-lg ">
       <button className=" bg-teal-500 text-white py-2 px-4 rounded-md hover:bg-teal-700 mb-4">
         <Link to="/add" className="font-bold">Add Task +</Link>
       </button>
       <h1 className="text-teal-500 text-3xl font-bold my-6 text-center">Task-Manager</h1>
+       {/* Search Bar Component */}
+       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <div className="space-y-6">
-        {tasks.map((task) => (
+      {filteredTasks.map((task) => (
           <div
             className="bg-white p-4 rounded-lg border-2 border-teal-500"
             key={task.id}
