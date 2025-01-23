@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
 const Add = () => {
@@ -29,7 +29,7 @@ const Add = () => {
 
     try {
       await axios.post("http://localhost:8800/tasks", task); // Send task with status
-      navigate('/'); // Navigate to the main page after adding task
+      navigate("/"); // Navigate to the main page after adding task
     } catch (err) {
       console.log(err);
     }
@@ -41,16 +41,15 @@ const Add = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-300">
-  <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative">
-    {/* Close Button */}
-    <button
-  onClick={handleClose}
-  className="absolute top-4 right-4  hover:text-red-800 focus:outline-none"
->
-  <FaTimes className="text-teal-500 text-xl" />
-</button>
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative">
+        {/* Close Button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4  hover:text-red-800 focus:outline-none"
+        >
+          <FaTimes className="text-teal-500 text-xl" />
+        </button>
 
-    
         <h1 className="text-2xl font-bold mb-4 text-center">Add New Task</h1>
         {/* Title Input */}
         <input
@@ -82,6 +81,6 @@ const Add = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Add;

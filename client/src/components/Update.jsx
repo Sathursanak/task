@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
 const Update = () => {
@@ -37,28 +37,27 @@ const Update = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8800/tasks/${taskId}`, task); 
-      navigate('/'); // Redirect to home page after updating
+      await axios.put(`http://localhost:8800/tasks/${taskId}`, task);
+      navigate("/"); // Redirect to home page after updating
     } catch (err) {
       console.log(err); // Log error if update fails
     }
   };
 
-  
   const handleClose = () => {
     navigate("/"); // Navigate back to the main page
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-300">
-  <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative">
-    {/* Close Button */}
-    <button
-      onClick={handleClose}
-      className="absolute top-4 right-4  shadow-md hover:text-red-800 focus:outline-none"
-    >
-      <FaTimes className="text-teal-500 text-xl" />
-    </button>
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative">
+        {/* Close Button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4  shadow-md hover:text-red-800 focus:outline-none"
+        >
+          <FaTimes className="text-teal-500 text-xl" />
+        </button>
         <h1 className="text-2xl font-bold mb-4 text-center">Update Task</h1>
         <input
           type="text"
@@ -85,6 +84,6 @@ const Update = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Update;
